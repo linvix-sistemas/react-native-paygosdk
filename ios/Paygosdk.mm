@@ -1,10 +1,10 @@
-#import "Paygosdk.h"
+#import "PaygoSdk.h"
 
 #ifdef RCT_NEW_ARCH_ENABLED
-#import "RNPaygosdkSpec.h"
+#import "RNPaygoSdkSpec.h"
 #endif
 
-@implementation Paygosdk
+@implementation PaygoSdk
 RCT_EXPORT_MODULE()
 
 // Example method
@@ -24,7 +24,7 @@ RCT_REMAP_METHOD(multiply,
 - (std::shared_ptr<facebook::react::TurboModule>)getTurboModule:
     (const facebook::react::ObjCTurboModule::InitParams &)params
 {
-    return std::make_shared<facebook::react::NativePaygosdkSpecJSI>(params);
+    return std::make_shared<facebook::react::NativePaygoSdkSpecJSI>(params);
 }
 #endif
 

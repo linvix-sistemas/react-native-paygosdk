@@ -1,5 +1,5 @@
 #import <React/RCTBridgeModule.h>
 
-@interface Paygosdk : NSObject <RCTBridgeModule>
+@interface PaygoSdk : NSObject <RCTBridgeModule>
 
 @end
