@@ -11,12 +11,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class PaygosdkPackage implements ReactPackage {
+public class PaygoSdkPackage implements ReactPackage {
     @NonNull
     @Override
     public List<NativeModule> createNativeModules(@NonNull ReactApplicationContext reactContext) {
         List<NativeModule> modules = new ArrayList<>();
-        modules.add(new PaygosdkModule(reactContext));
+        modules.add(new PaygoSdkModule(reactContext));
         return modules;
     }
 

@@ -1,7 +1,7 @@
 buildscript {
   repositories {
-      google()
-      mavenCentral()
+    google()
+    mavenCentral()
   }
 
   dependencies {
@@ -10,7 +10,7 @@ buildscript {
 }
 
 def isNewArchitectureEnabled() {
-  return rootProject.hasProperty("newArchEnabled") &&  rootProject.getProperty("newArchEnabled") == "true"
+  return rootProject.hasProperty("newArchEnabled") && rootProject.getProperty("newArchEnabled") == "true"
 }
 
 apply plugin: 'com.android.library'
@@ -20,11 +20,11 @@ if (isNewArchitectureEnabled()) {
 }
 
 def getExtOrDefault(name) {
-  return rootProject.ext.has(name) ? rootProject.ext.get(name) : project.properties['Paygosdk_' + name]
+  return rootProject.ext.has(name) ? rootProject.ext.get(name) : project.properties['PaygoSdk_' + name]
 }
 
 def getExtOrIntegerDefault(name) {
-  return rootProject.ext.has(name) ? rootProject.ext.get(name) : (project.properties['Paygosdk_' + name]).toInteger()
+  return rootProject.ext.has(name) ? rootProject.ext.get(name) : (project.properties['PaygoSdk_' + name]).toInteger()
 }
 
 android {
@@ -115,23 +115,25 @@ repositories {
 
   if (!found) {
     throw new GradleException(
-      "${project.name}: unable to locate React Native android sources. " +
-      "Ensure you have you installed React Native as a dependency in your project and try again."
+      "${project.name}: unable to locate React Native android sources.\nEnsure you have you installed React Native as a dependency in your project and try again."
     )
   }
 }
 
-
 dependencies {
-    //noinspection GradleDynamicVersion
+  // paygo interface de automação
+  implementation files('libs/InterfaceAutomacao-v2.0.0.8.aar')
+
+  //noinspection GradleDynamicVersion
   implementation "com.facebook.react:react-native:+"
-// From node_modules
+
+  // From node_modules
 }
 
 if (isNewArchitectureEnabled()) {
   react {
     jsRootDir = file("../src/")
-    libraryName = "Paygosdk"
+    libraryName = "PaygoSdk"
     codegenJavaPackageName = "com.reactnativepaygosdk"
   }
 }

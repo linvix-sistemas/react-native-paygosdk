@@ -1,4 +1,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.reactnativepaygosdk">
+  xmlns:tools="http://schemas.android.com/tools"
+  package="com.reactnativepaygosdk">
+
+  <application>
+    <service
+      android:name="br.com.setis.interfaceautomacao.ComunicacaoServico"
+      android:exported="true"
+      tools:node="merge"
+      tools:overrideLibrary="br.com.setis.interfaceautomacao" />
+  </application>
 
 </manifest>
