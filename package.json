@@ -1,6 +1,6 @@
 {
   "name": "react-native-paygosdk",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "test",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -28,15 +28,14 @@
     "prepare": "bob build",
     "release": "release-it",
     "example": "yarn --cwd example",
-    "bootstrap": "yarn example && yarn && yarn example pods"
+    "bootstrap": "yarn example && yarn"
   },
   "keywords": [
     "react-native",
-    "ios",
     "android"
   ],
   "repository": "https://github.com/linvix-sistemas/react-native-paygosdk",
-  "author": "Linvix Sistemas <dev@linvix.com.br> (https://github.com/linvix-sistemas/react-native-paygosdk)",
+  "author": "Cristiano Cruz <dev@linvix.com.br> (https://github.com/cristiano-linvix)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/linvix-sistemas/react-native-paygosdk/issues"
@@ -111,6 +110,8 @@
       "prettier"
     ],
     "rules": {
+      "@typescript-eslint/no-unused-vars": "off",
+      "no-unused-vars": "off",
       "prettier/prettier": [
         "error",
         {
