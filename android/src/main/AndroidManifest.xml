@@ -2,7 +2,10 @@
   xmlns:tools="http://schemas.android.com/tools"
   package="com.reactnativepaygosdk">
 
-  <application>
+  <application
+    tools:replace="android:allowBackup"
+    android:allowBackup="false"
+    >
     <service
       android:name="br.com.setis.interfaceautomacao.ComunicacaoServico"
       android:exported="true"

@@ -124,6 +124,9 @@ dependencies {
   // paygo interface de automação
   implementation files('libs/InterfaceAutomacao-v2.0.0.8.aar')
 
+  // required by paygosdk
+  implementation 'org.apache.commons:commons-lang3:3.12.0'
+
   //noinspection GradleDynamicVersion
   implementation "com.facebook.react:react-native:+"
 
