@@ -113,7 +113,6 @@ public class PaygoSdkModule extends ReactContextBaseJavaModule {
         return NAME;
     }
 
-
     @ReactMethod
     public void ConfigurarAutomacao(
         @NonNull String AutomacaoEmpresa,
@@ -146,10 +145,13 @@ public class PaygoSdkModule extends ReactContextBaseJavaModule {
             jsond.put("automacao_empresa", this.empresaAutomacao);
             jsond.put("automacao_nome", this.nomeAutomacao);
             jsond.put("automacao_versao", this.versaoAutomacao);
+
             jsond.put("suporta_troco", this.suportaTroco);
             jsond.put("suporta_desconto", this.suportaDesconto);
+
             jsond.put("vias_diferenciadas", this.suportaViasDiferenciadas);
             jsond.put("via_reduzida", this.suportaViaReduzida);
+
             jsond.put("retorna_comprovantes_graficos", this.retornaComprovantesGraficos);
 
             json.put("status", true);
@@ -183,10 +185,16 @@ public class PaygoSdkModule extends ReactContextBaseJavaModule {
         JSONObject jsond = new JSONObject();
         try {
             if (!TextUtils.isEmpty(ArquivoFonte)) {
-                this.fileFonteDestino = ArquivoFonte;
+                File FileFonteToolbar = new File(ArquivoFonte);
+                if (FileFonteToolbar.exists()) {
+                    this.fileFonteDestino = ArquivoFonte;
+                }
             }
             if (!TextUtils.isEmpty(ArquivoIconeToolbar)) {
-                this.fileIconDestino = ArquivoIconeToolbar;
+                File FileIconeToolbar = new File(ArquivoIconeToolbar);
+                if (FileIconeToolbar.exists()) {
+                    this.fileIconDestino = ArquivoIconeToolbar;
+                }
             }
             this.informaCorFonte = CorFonte;
             this.informaCorFonteTeclado = CorFonteTeclado;
@@ -223,9 +231,9 @@ public class PaygoSdkModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void Pagar(
+    public void Vender(
         // uuid da transação da aplicação
-        @NonNull String UUIDTransacaoAutomacao,
+        @NonNull String IDTransacaoAutomacao,
         @NonNull String ValorTransacao,
 
         @Nullable Integer ModalidadePagamento,
@@ -238,7 +246,7 @@ public class PaygoSdkModule extends ReactContextBaseJavaModule {
         final Promise promise
     ) {
         // configura os parâmetros necessários para efetuar a operação
-        this.identificacaoAutomacao = UUIDTransacaoAutomacao;
+        this.identificacaoAutomacao = IDTransacaoAutomacao;
         this.valorOperacao = ValorTransacao;
         this.modalidadePagamento = ModalidadePagamento;
         this.tipoCartao = TipoCartao;
@@ -251,18 +259,18 @@ public class PaygoSdkModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void Cancelamento(
+    public void Cancelar(
         // uuid da transação da aplicação
-        String UUIDTransacaoAutomacao,
-        String NSU,
-        String CodigoAutorizacao,
-        String DataOperacao,
-        String ValorTransacaoOriginal,
+        @NonNull String IDTransacaoAutomacao,
+        @NonNull String NSU,
+        @NonNull String CodigoAutorizacao,
+        @NonNull String DataOperacao,
+        @NonNull String ValorTransacaoOriginal,
 
         final Promise promise
     ) {
         // configura os parâmetros necessários para fazer a operação
-        this.identificacaoAutomacao = UUIDTransacaoAutomacao;
+        this.identificacaoAutomacao = IDTransacaoAutomacao;
         this.cancelamentoCodigoAutorizacao = CodigoAutorizacao;
         this.cancelamentoNsu = NSU;
         this.cancelamentoDataOperacao = DataOperacao;
