@@ -1,6 +1,6 @@
 //
 //  File.swift
-//  PaygosdkExample
+//  PaygoSdkExample
 //
 
 import Foundation
