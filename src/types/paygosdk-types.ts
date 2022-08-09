@@ -42,7 +42,7 @@ export type VenderType = {
   tipo_cartao?: PagarTipoCartaoEnum;
   tipo_financiamento?: PagarTipoFinanciamentoEnum;
 
-  parcelas?: bigint;
+  parcelas?: number;
   adquirente?: string;
 };
 

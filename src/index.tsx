@@ -1,7 +1,7 @@
 import { NativeModules, Platform } from 'react-native';
 
 // TYPES
-import * as Types from './types/paygosdk-types';
+import type * as Types from './types/paygosdk-types';
 
 const LINKING_ERROR =
   `The package 'react-native-paygosdk' doesn't seem to be linked. Make sure: \n\n` +
@@ -136,13 +136,14 @@ const Cancelar = async (data: Types.CancelarType) => {
 };
 
 const NativeModulePayGoSDK = {
-  Types: Types,
-
   ConfigurarAutomacao,
   ConfigurarPersonalizacao,
   Administrativa,
   Vender,
   Cancelar,
 };
+
+export * from './types/paygosdk-types';
+export * from './enums/paygosdk-enum';
 
 export default NativeModulePayGoSDK;
