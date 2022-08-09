@@ -1,0 +1,24 @@
+export enum PagarModalidadePagamentoEnum {
+  'PAGAMENTO_CARTAO' = 0,
+  'PAGAMENTO_DINHEIRO' = 1,
+  'PAGAMENTO_CHEQUE' = 2,
+  'PAGAMENTO_CARTEIRA_VIRTUAL' = 3,
+}
+
+export enum PagarTipoFinanciamentoEnum {
+  'FINANCIAMENTO_NAO_DEFINIDO' = 0,
+  'A_VISTA' = 1,
+  'PARCELADO_EMISSOR' = 2,
+  'PARCELADO_ESTABELECIMENTO' = 3,
+  'PRE_DATADO' = 4,
+  'CREDITO_EMISSOR' = 5,
+}
+
+export enum PagarTipoCartaoEnum {
+  'CARTAO_DESCONHECIDO' = 0,
+  'CARTAO_CREDITO' = 1,
+  'CARTAO_DEBITO' = 2,
+  'CARTAO_VOUCHER' = 3,
+  'CARTAO_PRIVATELABEL' = 4,
+  'CARTAO_FROTA' = 5,
+}
