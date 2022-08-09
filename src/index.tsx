@@ -1,12 +1,7 @@
 import { NativeModules, Platform } from 'react-native';
 
 // TYPES
-import type {
-  VenderType,
-  CancelarType,
-  ConfigurarAutomacaoType,
-  ConfigurarPersonalizacaoType,
-} from './types/paygosdk-types';
+import * as Types from './types/paygosdk-types';
 
 const LINKING_ERROR =
   `The package 'react-native-paygosdk' doesn't seem to be linked. Make sure: \n\n` +
@@ -28,7 +23,9 @@ const PaygoSdk = NativeModules.PaygoSdk
 /**
  * Configura a automação comercial
  */
-const ConfigurarPersonalizacao = async (data: ConfigurarPersonalizacaoType) => {
+const ConfigurarPersonalizacao = async (
+  data: Types.ConfigurarPersonalizacaoType
+) => {
   try {
     const result = await PaygoSdk.ConfigurarPersonalizacao(
       data.arquivo_fonte,
@@ -55,7 +52,7 @@ const ConfigurarPersonalizacao = async (data: ConfigurarPersonalizacaoType) => {
 /**
  * Configura a automação comercial
  */
-const ConfigurarAutomacao = async (data: ConfigurarAutomacaoType) => {
+const ConfigurarAutomacao = async (data: Types.ConfigurarAutomacaoType) => {
   try {
     const result = await PaygoSdk.ConfigurarAutomacao(
       data.automacao_empresa,
@@ -93,7 +90,7 @@ const Administrativa = async () => {
 /**
  * Faz uma transação de venda.
  */
-const Vender = async (data: VenderType) => {
+const Vender = async (data: Types.VenderType) => {
   try {
     if (data.valor_transacao <= 0) {
       throw new Error('Valor da transação não pode ser zero');
@@ -121,7 +118,7 @@ const Vender = async (data: VenderType) => {
 /**
  * Configura a automação comercial
  */
-const Cancelar = async (data: CancelarType) => {
+const Cancelar = async (data: Types.CancelarType) => {
   try {
     const result = await PaygoSdk.Cancelar(
       data.id_transacao_automacao,
@@ -139,6 +136,8 @@ const Cancelar = async (data: CancelarType) => {
 };
 
 const NativeModulePayGoSDK = {
+  Types: Types,
+
   ConfigurarAutomacao,
   ConfigurarPersonalizacao,
   Administrativa,
