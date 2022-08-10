@@ -38,7 +38,7 @@
     "android"
   ],
   "repository": "https://github.com/linvix-sistemas/react-native-paygosdk",
-  "author": "Cristiano Cruz <dev@linvix.com.br> (https://github.com/cristiano-linvix)",
+  "author": "Cristiano Cruz <cristiano@linvix.com.br> (https://github.com/cristiano-linvix)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/linvix-sistemas/react-native-paygosdk/issues"
