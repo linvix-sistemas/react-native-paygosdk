@@ -69,3 +69,5 @@ lib/
 #yarn
 .yarn/*
 .yarn
+.yarnrc.yml
+yarn.lock
