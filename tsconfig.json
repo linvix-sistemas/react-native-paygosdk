@@ -2,7 +2,8 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "react-native-paygosdk": ["./src/index"]
+      "react-native-paygosdk": ["./src/index"],
+      "@linvix-sistemas/react-native-paygosdk": ["./src/index"]
     },
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,

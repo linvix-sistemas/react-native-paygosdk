@@ -12,11 +12,11 @@ Para conseguir os dados necessários para funcionamento, você precisa de dados 
 ## Instalação
 
 ```sh
-npm install react-native-paygosdk
+npm install @linvix-sistemas/react-native-paygosdk
 ```
 
 ```sh
-yarn add react-native-paygosdk
+yarn add @linvix-sistemas/react-native-paygosdk
 ```
 ## Uso
 
@@ -25,7 +25,7 @@ import NativeModulePayGoSDK, {
   PagarTipoCartaoEnum,
   PagarModalidadePagamentoEnum,
   PagarTipoFinanciamentoEnum,
-} from 'react-native-paygosdk';
+} from '@linvix-sistemas/react-native-paygosdk';
 ```
 
 Veja a pasta [example](example/src/App.tsx) para verificar como utilizar.

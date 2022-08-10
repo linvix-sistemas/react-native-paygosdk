@@ -1,6 +1,6 @@
 {
   "packageManager": "yarn@3.2.2",
-  "name": "react-native-paygosdk",
+  "name": "@linvix-sistemas/react-native-paygosdk",
   "version": "1.0.5",
   "description": "test",
   "main": "lib/commonjs/index",
