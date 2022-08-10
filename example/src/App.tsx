@@ -6,7 +6,7 @@ import NativeModulePayGoSDK, {
   PagarTipoCartaoEnum,
   PagarModalidadePagamentoEnum,
   PagarTipoFinanciamentoEnum,
-} from 'react-native-paygosdk';
+} from '@linvix-sistemas/react-native-paygosdk';
 
 const HomeScreen = () => {
   const goConfigureAutomation = async () => {
