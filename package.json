@@ -1,6 +1,7 @@
 {
+  "packageManager": "yarn@3.2.2",
   "name": "react-native-paygosdk",
-  "version": "1.0.0",
+  "version": "1.0.5",
   "description": "test",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -28,7 +29,9 @@
     "prepare": "bob build",
     "release": "release-it",
     "example": "yarn --cwd example",
-    "bootstrap": "yarn example && yarn"
+    "bootstrap": "yarn example && yarn",
+    "prepublish": "yarn install",
+    "publish": "yarn npm publish --access public"
   },
   "keywords": [
     "react-native",
@@ -41,9 +44,6 @@
     "url": "https://github.com/linvix-sistemas/react-native-paygosdk/issues"
   },
   "homepage": "https://github.com/linvix-sistemas/react-native-paygosdk#readme",
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
-  },
   "devDependencies": {
     "@arkweid/lefthook": "^0.7.7",
     "@babel/eslint-parser": "^7.18.2",
