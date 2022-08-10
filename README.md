@@ -1,8 +1,7 @@
-# react-native-paygosdk
+# @linvix-sistemas/react-native-paygosdk
 Wrapper de comunicação com o PaygoIntegrado para react native.
 ## Atenção
 Este pacote foi desenvolvido para facilitar a integração com o SDK da Paygo para transações TEF junto ao PAYGO INTEGRADO.
-
 Ou seja, este pacote NÃO FUNCIONA sem o Paygo Integrado.
 
 ## Paygo
