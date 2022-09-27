@@ -549,7 +549,7 @@ public class PaygoSdkModule extends ReactContextBaseJavaModule {
         // via cliente reduzida
         String via_cliente_reduzida = "";
         if (mSaidaTransacao.obtemComprovanteReduzidoPortador() != null) {
-            for (String linha : mSaidaTransacao.obtemComprovanteDiferenciadoLoja()) {
+            for (String linha : mSaidaTransacao.obtemComprovanteReduzidoPortador()) {
                 via_cliente_reduzida += linha;
             }
         }
