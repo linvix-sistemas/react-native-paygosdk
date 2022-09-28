@@ -384,15 +384,15 @@ public class PaygoSdkModule extends ReactContextBaseJavaModule {
                 e.printStackTrace();
                 promise.reject(String.valueOf(mSaidaTransacao.obtemResultadoTransacao()), e.getMessage(), e.fillInStackTrace());
 
-            } catch (TerminalNaoConfiguradoExcecao terminalNaoConfiguradoExcecao) {
+            } catch (AplicacaoNaoInstaladaExcecao e) {
 
-                terminalNaoConfiguradoExcecao.printStackTrace();
-                promise.reject(String.valueOf(mSaidaTransacao.obtemResultadoTransacao()), terminalNaoConfiguradoExcecao.getMessage(), terminalNaoConfiguradoExcecao.fillInStackTrace());
+              e.printStackTrace();
+              promise.reject(String.valueOf(mSaidaTransacao.obtemResultadoTransacao()), e.getMessage(), e.fillInStackTrace());
 
-            } catch (AplicacaoNaoInstaladaExcecao aplicacaoNaoInstaladaExcecao) {
+            }  catch (Exception e) {
 
-                aplicacaoNaoInstaladaExcecao.printStackTrace();
-                promise.reject(String.valueOf(mSaidaTransacao.obtemResultadoTransacao()), aplicacaoNaoInstaladaExcecao.getMessage(), aplicacaoNaoInstaladaExcecao.fillInStackTrace());
+                e.printStackTrace();
+                promise.reject(String.valueOf(mSaidaTransacao.obtemResultadoTransacao()), e.getMessage(), e.fillInStackTrace());
 
             } finally {
                 mEntradaTransacao = null;
