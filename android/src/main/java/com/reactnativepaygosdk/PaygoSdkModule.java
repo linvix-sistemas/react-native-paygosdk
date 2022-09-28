@@ -29,7 +29,6 @@ import br.com.setis.interfaceautomacao.Operacoes;
 import br.com.setis.interfaceautomacao.Personalizacao;
 import br.com.setis.interfaceautomacao.QuedaConexaoTerminalExcecao;
 import br.com.setis.interfaceautomacao.SaidaTransacao;
-import br.com.setis.interfaceautomacao.TerminalNaoConfiguradoExcecao;
 import br.com.setis.interfaceautomacao.TransacaoPendenteDados;
 import br.com.setis.interfaceautomacao.Transacoes;
 
