@@ -29,6 +29,7 @@ import br.com.setis.interfaceautomacao.Operacoes;
 import br.com.setis.interfaceautomacao.Personalizacao;
 import br.com.setis.interfaceautomacao.QuedaConexaoTerminalExcecao;
 import br.com.setis.interfaceautomacao.SaidaTransacao;
+import br.com.setis.interfaceautomacao.StatusTransacao;
 import br.com.setis.interfaceautomacao.TransacaoPendenteDados;
 import br.com.setis.interfaceautomacao.Transacoes;
 
@@ -77,7 +78,7 @@ public class PaygoSdkModule extends ReactContextBaseJavaModule {
     private String cancelamentoValorTransacaoOriginal;
 
     // Configurações
-    // private boolean confirmacaoManual = false;
+    private boolean confirmacaoManual = false;
     private boolean suportaViasDiferenciadas = false;
     private boolean suportaViaReduzida = false;
     private boolean suportaTroco = false;
@@ -234,6 +235,7 @@ public class PaygoSdkModule extends ReactContextBaseJavaModule {
         // uuid da transação da aplicação
         @NonNull String IDTransacaoAutomacao,
         @NonNull String ValorTransacao,
+        @NonNull Boolean ConfirmarManual,
 
         @Nullable Integer ModalidadePagamento,
         @Nullable Integer TipoCartao,
@@ -247,6 +249,8 @@ public class PaygoSdkModule extends ReactContextBaseJavaModule {
         // configura os parâmetros necessários para efetuar a operação
         this.identificacaoAutomacao = IDTransacaoAutomacao;
         this.valorOperacao = ValorTransacao;
+        this.confirmacaoManual = ConfirmarManual;
+
         this.modalidadePagamento = ModalidadePagamento;
         this.tipoCartao = TipoCartao;
         this.tipoFinanciamento = TipoFinanciamento;
@@ -375,9 +379,18 @@ public class PaygoSdkModule extends ReactContextBaseJavaModule {
                     return;
                 }
 
-                mConfirmacao.informaIdentificadorConfirmacaoTransacao(
-                    mSaidaTransacao.obtemIdentificadorConfirmacaoTransacao()
-                );
+                // se for pra confirmar manual, precisa confirmar posteriormente
+                if (this.confirmacaoManual == false) {
+                    if (mSaidaTransacao.obtemInformacaoConfirmacao() == true) {
+                        mConfirmacao.informaStatusTransacao(StatusTransacao.CONFIRMADO_AUTOMATICO);
+
+                        mConfirmacao.informaIdentificadorConfirmacaoTransacao(
+                            mSaidaTransacao.obtemIdentificadorConfirmacaoTransacao()
+                        );
+
+                        mTransacoes.confirmaTransacao(mConfirmacao);
+                    }
+                }
             } catch (QuedaConexaoTerminalExcecao e) {
 
                 e.printStackTrace();
@@ -385,10 +398,10 @@ public class PaygoSdkModule extends ReactContextBaseJavaModule {
 
             } catch (AplicacaoNaoInstaladaExcecao e) {
 
-              e.printStackTrace();
-              promise.reject(String.valueOf(mSaidaTransacao.obtemResultadoTransacao()), e.getMessage(), e.fillInStackTrace());
+                e.printStackTrace();
+                promise.reject(String.valueOf(mSaidaTransacao.obtemResultadoTransacao()), e.getMessage(), e.fillInStackTrace());
 
-            }  catch (Exception e) {
+            } catch (Exception e) {
 
                 e.printStackTrace();
                 promise.reject(String.valueOf(mSaidaTransacao.obtemResultadoTransacao()), e.getMessage(), e.fillInStackTrace());

@@ -95,6 +95,13 @@ const Vender = async (data: Types.VenderType) => {
     if (data.valor_transacao <= 0) {
       throw new Error('Valor da transação não pode ser zero');
     }
+    if (!data.id_transacao_automacao) {
+      throw new Error('ID da transação da automação não foi informado');
+    }
+
+    // se não enviar a confirmação da transação
+    data.confirmar_transacao_manualmente =
+      data.confirmar_transacao_manualmente === true ? true : false;
 
     // formata o valor da transação para o padrão aceito do paygo
     const valor_transacao = data?.valor_transacao?.toFixed(2)?.replace('.', '');
@@ -102,6 +109,7 @@ const Vender = async (data: Types.VenderType) => {
     const result = await PaygoSdk.Vender(
       data.id_transacao_automacao,
       valor_transacao,
+      data.confirmar_transacao_manualmente,
       data.modalidade_pagamento,
       data.tipo_cartao,
       data.tipo_financiamento,

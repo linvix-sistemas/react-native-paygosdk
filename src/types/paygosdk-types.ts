@@ -42,6 +42,8 @@ export type VenderType = {
   tipo_cartao?: PagarTipoCartaoEnum;
   tipo_financiamento?: PagarTipoFinanciamentoEnum;
 
+  confirmar_transacao_manualmente?: boolean;
+
   parcelas?: number;
   adquirente?: string;
 };
