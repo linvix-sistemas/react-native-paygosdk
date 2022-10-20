@@ -125,7 +125,7 @@ const Cancelar = async (data: Types.CancelarType) => {
 
       data.transacao_original_nsu,
       data.transacao_original_codigo_aut,
-      data.transacao_original_data_cancelamento,
+      data.transacao_original_data_operacao,
       data.transacao_original_valor
     );
 

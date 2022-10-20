@@ -51,7 +51,7 @@ export type CancelarType = {
 
   transacao_original_nsu: string;
   transacao_original_codigo_aut: string;
-  transacao_original_data_cancelamento: Date;
+  transacao_original_data_operacao: string;
   transacao_original_valor: number;
 };
 
