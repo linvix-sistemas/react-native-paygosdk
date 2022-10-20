@@ -120,13 +120,18 @@ const Vender = async (data: Types.VenderType) => {
  */
 const Cancelar = async (data: Types.CancelarType) => {
   try {
+    // formata o valor da transação para o padrão aceito do paygo
+    const valor_transacao = data?.transacao_original_valor
+      ?.toFixed(2)
+      ?.replace('.', '');
+
     const result = await PaygoSdk.Cancelar(
       data.id_transacao_automacao,
 
       data.transacao_original_nsu,
       data.transacao_original_codigo_aut,
       data.transacao_original_data_operacao,
-      data.transacao_original_valor
+      valor_transacao
     );
 
     return JSON.parse(result);
