@@ -16,6 +16,8 @@ const HomeScreen = () => {
         automacao_nome: 'RNPAYGOSDK',
         automacao_versao: '0.0.1',
 
+        acao_transacao_pendente: 'confirmar',
+
         suporta_desconto: false,
         suporta_troco: false,
 

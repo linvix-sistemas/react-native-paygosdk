@@ -9,6 +9,8 @@ export type ConfigurarAutomacaoType = {
   automacao_nome: string;
   automacao_versao: string;
 
+  acao_transacao_pendente: 'confirmar' | 'desfazer' | 'nada';
+
   suporta_troco: boolean;
   suporta_desconto: boolean;
 

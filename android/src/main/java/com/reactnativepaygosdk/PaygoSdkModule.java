@@ -38,6 +38,7 @@ import static br.com.setis.interfaceautomacao.ModalidadesPagamento.*;
 import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Objects;
 
 @ReactModule(name = PaygoSdkModule.NAME)
 public class PaygoSdkModule extends ReactContextBaseJavaModule {
@@ -78,6 +79,7 @@ public class PaygoSdkModule extends ReactContextBaseJavaModule {
     private String cancelamentoValorTransacaoOriginal;
 
     // Configurações
+    private String acaoTransacaoPendente = "confirmar";
     private boolean confirmacaoManual = false;
     private boolean suportaViasDiferenciadas = false;
     private boolean suportaViaReduzida = false;
@@ -119,6 +121,8 @@ public class PaygoSdkModule extends ReactContextBaseJavaModule {
         @NonNull String AutomacaoNome,
         @NonNull String AutomacaoVersao,
 
+        @NonNull String AcaoTransacaoPendente,
+
         @NonNull Boolean SuportaTroco,
         @NonNull Boolean SuportaDesconto,
 
@@ -135,6 +139,7 @@ public class PaygoSdkModule extends ReactContextBaseJavaModule {
             this.empresaAutomacao = AutomacaoEmpresa;
             this.nomeAutomacao = AutomacaoNome;
             this.versaoAutomacao = AutomacaoVersao;
+            this.acaoTransacaoPendente = AcaoTransacaoPendente;
             this.suportaTroco = SuportaTroco;
             this.suportaDesconto = SuportaDesconto;
             this.suportaViasDiferenciadas = ViasDiferenciadas;
@@ -145,6 +150,8 @@ public class PaygoSdkModule extends ReactContextBaseJavaModule {
             jsond.put("automacao_empresa", this.empresaAutomacao);
             jsond.put("automacao_nome", this.nomeAutomacao);
             jsond.put("automacao_versao", this.versaoAutomacao);
+
+            jsond.put("acao_transacao_pendente", this.acaoTransacaoPendente);
 
             jsond.put("suporta_troco", this.suportaTroco);
             jsond.put("suporta_desconto", this.suportaDesconto);
@@ -391,6 +398,29 @@ public class PaygoSdkModule extends ReactContextBaseJavaModule {
                         mTransacoes.confirmaTransacao(mConfirmacao);
                     }
                 }
+
+                // ação para transação pendente
+                if (mSaidaTransacao.existeTransacaoPendente()) {
+                    Log.d(DEBUG_TAG, "EXISTE TRANSAÇÃO PENDENTE - NSU: \n".concat(Objects.requireNonNull(mSaidaTransacao.obtemDadosTransacaoPendente()).toString()));
+                    Log.d(DEBUG_TAG, "A AÇÃO PARA TRANSAÇÕES PENDENTES É: ".concat(this.acaoTransacaoPendente));
+
+                    if (Objects.equals(this.acaoTransacaoPendente, "confirmar") || Objects.equals(this.acaoTransacaoPendente, "desfazer")) {
+                        Confirmacoes mConfirmacaoPendente = new Confirmacoes();
+
+                        if (Objects.equals(this.acaoTransacaoPendente, "confirmar")) {
+                            mConfirmacaoPendente.informaStatusTransacao(StatusTransacao.CONFIRMADO_MANUAL);
+                        }
+                        if (Objects.equals(this.acaoTransacaoPendente, "desfazer")) {
+                            mConfirmacaoPendente.informaStatusTransacao(StatusTransacao.DESFEITO_MANUAL);
+                        }
+
+                        // resolve a transação pendente
+                        mTransacoes.resolvePendencia(mSaidaTransacao.obtemDadosTransacaoPendente(), mConfirmacaoPendente);
+
+                        Log.d(DEBUG_TAG, "TRANSAÇÃO PENDENTE RESOLVIDA");
+                    }
+                }
+
             } catch (QuedaConexaoTerminalExcecao e) {
 
                 e.printStackTrace();
@@ -534,7 +564,7 @@ public class PaygoSdkModule extends ReactContextBaseJavaModule {
                 json_data.put("identificador_estabelecimento", (DadosTrnPend.obtemIdentificadorEstabelecimento() != null ? DadosTrnPend.obtemIdentificadorEstabelecimento() : ""));
                 json_data.put("nsu_local", (DadosTrnPend.obtemNsuLocal() != null ? DadosTrnPend.obtemNsuLocal() : ""));
                 json_data.put("nsu_transacao", (DadosTrnPend.obtemNsuTransacao() != null ? DadosTrnPend.obtemNsuTransacao() : ""));
-                json_data.put("nsu_host", (DadosTrnPend.obtemNsuLocal() != null ? DadosTrnPend.obtemNsuLocal() : ""));
+                json_data.put("nsu_host", (DadosTrnPend.obtemNsuHost() != null ? DadosTrnPend.obtemNsuHost() : ""));
 
                 json.put("dados_transacao_pendente", json_data);
             }

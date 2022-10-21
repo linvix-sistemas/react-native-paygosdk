@@ -54,10 +54,17 @@ const ConfigurarPersonalizacao = async (
  */
 const ConfigurarAutomacao = async (data: Types.ConfigurarAutomacaoType) => {
   try {
+    // configura por default para confirmar a transação pendente
+    if (!data.acao_transacao_pendente) {
+      data.acao_transacao_pendente = 'confirmar';
+    }
+
     const result = await PaygoSdk.ConfigurarAutomacao(
       data.automacao_empresa,
       data.automacao_nome,
       data.automacao_versao,
+
+      data.acao_transacao_pendente,
 
       data.suporta_troco,
       data.suporta_desconto,
