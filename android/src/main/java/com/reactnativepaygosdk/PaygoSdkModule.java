@@ -46,7 +46,6 @@ public class PaygoSdkModule extends ReactContextBaseJavaModule {
 
     private final Context appContext;
 
-    private Confirmacoes mConfirmacao = new Confirmacoes();
     private DadosAutomacao mDadosAutomacao = null;
     private Personalizacao mPersonalizacao;
     private Transacoes mTransacoes = null;
@@ -101,7 +100,7 @@ public class PaygoSdkModule extends ReactContextBaseJavaModule {
     private String informaCorTeclaLiberadaTeclado = "";
     private String informaCorSeparadorMenu = "";
 
-    private static final String DEBUG_TAG = "[react-native-paygosdk]";
+    private static final String DEBUG_TAG = "PG[rn-paygosdk]";
 
     PaygoSdkModule(ReactApplicationContext context) {
         super(context);
@@ -372,8 +371,6 @@ public class PaygoSdkModule extends ReactContextBaseJavaModule {
 
         }
 
-        // cria a confirmação
-        mConfirmacao = new Confirmacoes();
 
         Log.d(DEBUG_TAG, "CRIANDO THREAD TRANSAÇÃO!");
         new Thread(() -> {
@@ -386,16 +383,21 @@ public class PaygoSdkModule extends ReactContextBaseJavaModule {
                     return;
                 }
 
+                Log.d(DEBUG_TAG, "CONFIRMAÇÃO MANUAL: ".concat(this.confirmacaoManual == true ? "SIM" : "NÃO"));
+
                 // se for pra confirmar manual, precisa confirmar posteriormente
                 if (this.confirmacaoManual == false) {
                     if (mSaidaTransacao.obtemInformacaoConfirmacao() == true) {
-                        mConfirmacao.informaStatusTransacao(StatusTransacao.CONFIRMADO_AUTOMATICO);
+                        // cria a confirmação
+                        Confirmacoes mConfirmacaoPendente = new Confirmacoes();
 
-                        mConfirmacao.informaIdentificadorConfirmacaoTransacao(
+                        mConfirmacaoPendente.informaStatusTransacao(StatusTransacao.CONFIRMADO_AUTOMATICO);
+
+                        mConfirmacaoPendente.informaIdentificadorConfirmacaoTransacao(
                             mSaidaTransacao.obtemIdentificadorConfirmacaoTransacao()
                         );
 
-                        mTransacoes.confirmaTransacao(mConfirmacao);
+                        mTransacoes.confirmaTransacao(mConfirmacaoPendente);
                     }
                 }
 
