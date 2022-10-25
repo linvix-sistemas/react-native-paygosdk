@@ -1,7 +1,7 @@
 {
   "packageManager": "yarn@3.2.2",
   "name": "@linvix-sistemas/react-native-paygosdk",
-  "version": "1.0.20",
+  "version": "1.0.21",
   "description": "Pacote de comunicação com o PayGO Integrado, para fazer transações TEF nos dispositivos android.",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
