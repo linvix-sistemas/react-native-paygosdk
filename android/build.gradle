@@ -55,6 +55,13 @@ repositories {
     mavenCentral()
     google()
 
+    //    maven {
+    //        url "$projectDir/repository"
+    //    }
+    //    maven {
+    //        url("$rootDir/../node_modules/@linvix-sistemas/react-native-paygosdk/android/repository")
+    //    }
+
     def found = false
     def defaultDir = null
     def androidSourcesName = 'React Native sources'
@@ -120,9 +127,15 @@ repositories {
     }
 }
 
+
 dependencies {
     // paygo interface de automação
     implementation files('libs/InterfaceAutomacao-v2.0.0.8.aar')
+    
+    // implementation(name: 'InterfaceAutomacao-v2.0.0.8', ext: 'aar')
+    
+    // teste maven
+    // implementation 'com.paygo:interface-automacao:2.0.0.8'
 
     // required by paygosdk
     implementation 'org.apache.commons:commons-lang3:3.12.0'
