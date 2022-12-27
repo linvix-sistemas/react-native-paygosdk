@@ -8,14 +8,24 @@ Ou seja, este pacote NÃO FUNCIONA sem o Paygo Integrado.
 Para conseguir os dados necessários para funcionamento, você precisa de dados fornecidos pela Paygo ou por uma revenda Paygo.
 
 
-## Instalação
+## Instalação PayGo Integrado = 4.1.15.1
 
 ```sh
-npm install @linvix-sistemas/react-native-paygosdk
+npm install @linvix-sistemas/react-native-paygosdk@^1.0.21
 ```
 
 ```sh
-yarn add @linvix-sistemas/react-native-paygosdk
+yarn add @linvix-sistemas/react-native-paygosdk@^1.0.21
+```
+
+## Instalação PayGo Integrado >= 4.1.21.5
+
+```sh
+npm install @linvix-sistemas/react-native-paygosdk@^2.0.0
+```
+
+```sh
+yarn add @linvix-sistemas/react-native-paygosdk@^2.0.0
 ```
 ## Uso
 
