@@ -11,11 +11,11 @@ Para conseguir os dados necessários para funcionamento, você precisa de dados 
 ## Instalação PayGo Integrado = 4.1.15.1
 
 ```sh
-npm install @linvix-sistemas/react-native-paygosdk@~1.0.x
+npm install @linvix-sistemas/react-native-paygosdk@^1.0.21
 ```
 
 ```sh
-yarn add @linvix-sistemas/react-native-paygosdk@~1.0.x
+yarn add @linvix-sistemas/react-native-paygosdk@^1.0.21
 ```
 
 ## Instalação PayGo Integrado >= 4.1.21.5
