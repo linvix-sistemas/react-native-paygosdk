@@ -450,7 +450,7 @@ public class PaygoSdkModule extends ReactContextBaseJavaModule {
                     json.put("data", json_data);
 
                     // se a transação abaixo não for igual, teve algum problema no lado da paygo
-                    if (mEntradaTransacao.obtemValorTotal().equals(mSaidaTransacao.obtemValorTotal())) {
+                    if (Float.parseFloat(mEntradaTransacao.obtemValorTotal()) == Float.parseFloat(mSaidaTransacao.obtemValorTotal())) {
                         // retorna os dados como sucesso
                         promise.resolve(json.toString());
                     } else {
