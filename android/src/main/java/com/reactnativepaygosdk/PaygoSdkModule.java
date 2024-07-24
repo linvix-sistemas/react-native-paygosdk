@@ -454,8 +454,14 @@ public class PaygoSdkModule extends ReactContextBaseJavaModule {
                         // retorna os dados como sucesso
                         promise.resolve(json.toString());
                     } else {
-                        Log.d(DEBUG_TAG, "VALOR DE TRANSAÇÃO RETORNADO, DIFERENTE DO SOLICITADO: ".concat(json.toString()));
-                        promise.reject("DIFFERENT_VALUE", "POR FAVOR, REFAÇA A TRANSAÇÃO");
+                        // se deu sucesso na transação
+                        if (resultado == 0) {
+                            Log.d(DEBUG_TAG, "VALOR DE TRANSAÇÃO RETORNADO, DIFERENTE DO SOLICITADO: ".concat(json.toString()));
+                            promise.reject("DIFFERENT_VALUE", "POR FAVOR, REFAÇA A TRANSAÇÃO");
+                        } else {
+                            // retorna os dados como sucesso
+                            promise.resolve(json.toString());
+                        }
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
