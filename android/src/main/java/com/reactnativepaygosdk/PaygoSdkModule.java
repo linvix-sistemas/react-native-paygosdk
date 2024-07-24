@@ -365,7 +365,7 @@ public class PaygoSdkModule extends ReactContextBaseJavaModule {
             }
 
             // Informa o adquirente que vai transacionar
-            if (!this.adquirente.equals("")) {
+            if (!this.adquirente.isEmpty()) {
                 mEntradaTransacao.informaNomeProvedor(this.adquirente);
             }
 
@@ -383,11 +383,11 @@ public class PaygoSdkModule extends ReactContextBaseJavaModule {
                     return;
                 }
 
-                Log.d(DEBUG_TAG, "CONFIRMAÇÃO MANUAL: ".concat(this.confirmacaoManual == true ? "SIM" : "NÃO"));
+                Log.d(DEBUG_TAG, "CONFIRMAÇÃO MANUAL: ".concat(this.confirmacaoManual ? "SIM" : "NÃO"));
 
                 // se for pra confirmar manual, precisa confirmar posteriormente
-                if (this.confirmacaoManual == false) {
-                    if (mSaidaTransacao.obtemInformacaoConfirmacao() == true) {
+                if (!this.confirmacaoManual) {
+                    if (mSaidaTransacao.obtemInformacaoConfirmacao()) {
                         // cria a confirmação
                         Confirmacoes mConfirmacaoPendente = new Confirmacoes();
 
@@ -423,23 +423,17 @@ public class PaygoSdkModule extends ReactContextBaseJavaModule {
                     }
                 }
 
-            } catch (QuedaConexaoTerminalExcecao e) {
-
-                e.printStackTrace();
-                promise.reject(String.valueOf(mSaidaTransacao.obtemResultadoTransacao()), e.getMessage(), e.fillInStackTrace());
-
-            } catch (AplicacaoNaoInstaladaExcecao e) {
+            } catch (QuedaConexaoTerminalExcecao | AplicacaoNaoInstaladaExcecao e) {
 
                 e.printStackTrace();
                 promise.reject(String.valueOf(mSaidaTransacao.obtemResultadoTransacao()), e.getMessage(), e.fillInStackTrace());
 
             } catch (Exception e) {
 
-                e.printStackTrace();
                 promise.reject(String.valueOf(mSaidaTransacao.obtemResultadoTransacao()), e.getMessage(), e.fillInStackTrace());
+                e.printStackTrace();
 
             } finally {
-                mEntradaTransacao = null;
 
                 // json de retorno
                 JSONObject json = new JSONObject();
@@ -455,11 +449,20 @@ public class PaygoSdkModule extends ReactContextBaseJavaModule {
                     json.put("resultado", resultado);
                     json.put("data", json_data);
 
-                    // retorna os dados como sucesso
-                    promise.resolve(json.toString());
+                    // se a transação abaixo não for igual, teve algum problema no lado da paygo
+                    if (mEntradaTransacao.obtemValorTotal().equals(mSaidaTransacao.obtemValorTotal())) {
+                        // retorna os dados como sucesso
+                        promise.resolve(json.toString());
+                    } else {
+                        Log.d(DEBUG_TAG, "VALOR DE TRANSAÇÃO RETORNADO, DIFERENTE DO SOLICITADO: ".concat(json.toString()));
+                        promise.reject("DIFFERENT_VALUE", "POR FAVOR, REFAÇA A TRANSAÇÃO");
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+
+                // limpa o entrada transação
+                mEntradaTransacao = null;
             }
         }).start();
     }
